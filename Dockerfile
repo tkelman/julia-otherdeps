@@ -1,8 +1,5 @@
-FROM tkelman/julia-openblas
+FROM tkelman/julia-llvm33
 MAINTAINER Tony Kelman <tony@kelman.net>
 
-RUN dpkg --add-architecture i386 && apt-get update && \
-    apt-get install -y --no-install-recommends m4 cmake \
-        libssl-dev libssl-dev:i386 && \
-    cd /home/julia32 && make -j4 -C deps && \
-    cd /home/julia64 && make -j4 -C deps
+RUN cd /home/julia-i686 && make -j2 -C deps && \
+    cd /home/julia-x86_64 && make -j2 -C deps
